@@ -1,2 +1,35 @@
 server:
   port: 8888
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      filters: stat
+      maxActive: 200
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 200
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zjy.entity
+  # 开启mybatis驼峰自动转换
+  configuration:
+    mapUnderscoreToCamelCase: true
+    # 打印sql
+logging:
+  level:
+     com.zjy.mapper: debug
